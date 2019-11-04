@@ -36,7 +36,7 @@
 /**
  * Default String published by Talker
  */
-extern std::string message="Written By Aman Virmani";
+extern std::string message = "Written By Aman Virmani";
 
 /**
  * @brief Function to call service
@@ -45,8 +45,7 @@ extern std::string message="Written By Aman Virmani";
  * @return bool
  */
 bool say(beginner_tutorials::modifyTalkerString::Request  &req,
-         beginner_tutorials::modifyTalkerString::Response &res)
-{
+         beginner_tutorials::modifyTalkerString::Response &res) {
   res.modifiedStr = req.inputStr;
   message = res.modifiedStr;
   ROS_INFO_STREAM("Default message by talker changed to: ");
