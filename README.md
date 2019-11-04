@@ -38,7 +38,19 @@ nano ~/.bashrc
 source ~/catkin_ws/devel/setup.bash
 source ~/.bashrc
 ```
+To launch nodes, can either use a launch file or rosrun. Launch file will let user to launch several nodes in one command. Instructions for both types are below: 
 
+#### Using Launch File
+To use launch file type the following command in the terminal:
+```
+roslaunch begineer_tutorials week10HW.launch
+```
+User can change the frequency at which the loop operates by the following command;
+```
+roslaunch begineer_tutorials week10HW.launch frequency:=7
+```
+
+#### Using rosrun
 In a new terminal[1], type 
 ```
 roscore
@@ -58,4 +70,17 @@ In an another new terminal[3], type
 ```
 cd ~/catkin_ws
 rosrun beginner_tutorials listener
+```
+
+# Service
+
+Change the output string of Talker using the given command:
+```
+rosservice call /modifyTalkerMessage "sample text"
+```
+
+# Logging
+Invoke rqt_console GUI using the following command in a new terminal: 
+```
+rqt_console
 ```
