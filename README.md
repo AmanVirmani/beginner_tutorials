@@ -25,7 +25,7 @@ cd ~/catkin_ws/
 catkin_make
 source devel/setup.bash
 cd src/
-git clone https://github.com/AmanVirmani/beginner_tutorials.git
+git clone -b Week10_HW --single_branch https://github.com/AmanVirmani/beginner_tutorials.git
 cd ..
 catkin_make
 ```
