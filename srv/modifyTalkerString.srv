@@ -1,0 +1,4 @@
+# this service takes a request string and returns a modified string
+string inputStr
+---
+string modifiedStr
