@@ -31,9 +31,37 @@
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "beginner_tutorials/modifyTalkerString.h"
+
+/**
+ * Default String published by Talker
+ */
+extern std::string message="Written By Aman Virmani";
+
+/**
+ * @brief Function to call service
+ * @param req Input String sent as input to service
+ * @param res Response sent by service 
+ * @return bool
+ */
+bool say(beginner_tutorials::modifyTalkerString::Request  &req,
+         beginner_tutorials::modifyTalkerString::Response &res)
+{
+  res.modifiedStr = req.inputStr;
+  message = res.modifiedStr;
+  ROS_INFO_STREAM("Default message by talker changed to: ");
+  return true;
+}
+
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
+ */
+/**
+ * @brief      main function
+ * @param      argc  The argc
+ * @param      argv  The argv
+ * @return     nothing
  */
 int main(int argc, char **argv) {
   /**
@@ -47,6 +75,33 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
+
+
+  // variable to store loop frequency and default is set to 10Hz
+  int talkerFrequency = 10;
+
+  if (argc > 1) {
+    // converting frequency input to int
+    talkerFrequency = atoi(argv[1]);
+  }
+
+  if (talkerFrequency > 0) {
+    ROS_DEBUG_STREAM("Talker publishing at frequency: "<< talkerFrequency);
+  } else if (talkerFrequency < 0) {
+    ROS_FATAL_STREAM("Talker expects positive value of frequency");
+
+    ROS_WARN_STREAM("Talker frequency set to default value of 10Hz");
+
+    // setting default value for talkerFrequency
+    talkerFrequency = 10;
+  } else if (talkerFrequency == 0) {
+    ROS_ERROR_STREAM("Talker expects non-zero frequency");
+
+    ROS_WARN_STREAM("Talker frequency set to default value of 10Hz");
+
+    // setting default value for talkerFrequency
+    talkerFrequency = 10;
+}
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -72,10 +127,11 @@ int main(int argc, char **argv) {
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise < std_msgs::String
-      > ("chatter", 1000);
+  auto chatter_pub = n.advertise < std_msgs::String > ("chatter", 1000);
 
-  ros::Rate loop_rate(10);
+  auto server = n.advertiseService("modifyTalkerMessage", say);
+
+  ros::Rate loop_rate(talkerFrequency);
 
   /**
    * A count of how many messages we have sent. This is used to create
@@ -89,7 +145,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << count << "Created By Aman Virmani";
+    ss << count << " " << message;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
