@@ -32,6 +32,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "beginner_tutorials/modifyTalkerString.h"
+#include <tf/transform_broadcaster.h>
 
 /**
  * Default String published by Talker
@@ -74,6 +75,10 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
+
+  // tf transform broadcaster object
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
 
 
   // variable to store loop frequency and default is set to 10Hz
@@ -156,6 +161,17 @@ int main(int argc, char **argv) {
      * in the constructor above.
      */
     chatter_pub.publish(msg);
+
+    // set translation
+    transform.setOrigin(tf::Vector3(0.0, 2.0, 0.0));
+    // set rotation
+    tf::Quaternion q;
+    q.setRPY(0, 0, 1);
+    transform.setRotation(q);
+
+    // broadcast the transform
+    br.sendTransform(
+        tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
     ros::spinOnce();
 
