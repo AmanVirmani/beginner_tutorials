@@ -23,10 +23,10 @@
  ******************************************************************************/
 
 /**
- * @file      talker.cpp
+ * @file      testService.cpp
  * @author    Aman Virmani
  * @copyright MIT License
- * @brief     ROS publisher node implementation 
+ * @brief     A ROS test using gtest framework to test existence of modifyTalkerString service
  */
 
 #include <gtest/gtest.h>

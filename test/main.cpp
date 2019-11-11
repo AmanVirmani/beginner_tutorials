@@ -26,7 +26,7 @@
  * @file      main.cpp
  * @author    Aman Virmani
  * @copyright MIT License
- * @brief     ROS publisher node implementation 
+ * @brief     Run all tests 
  */
 
 #include <ros/ros.h>
