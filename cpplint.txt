@@ -1,5 +1,10 @@
-Done processing src/listener.cpp
-Done processing src/talker.cpp
-src/talker.cpp:47:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::modifyTalkerString::Request  &req  [runtime/references] [2]
-src/talker.cpp:48:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::modifyTalkerString::Response &res  [runtime/references] [2]
-Total errors found: 2
+Done processing ./src/listener.cpp
+./src/talker.cpp:48:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::modifyTalkerString::Request  &req  [runtime/references] [2]
+./src/talker.cpp:49:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::modifyTalkerString::Response &res  [runtime/references] [2]
+Done processing ./src/talker.cpp
+./test/main.cpp:43:  Missing space after ,  [whitespace/comma] [3]
+Done processing ./test/main.cpp
+./test/testService.cpp:44:  Missing space after ,  [whitespace/comma] [3]
+./test/testService.cpp:48:  Lines should be <= 80 characters long  [whitespace/line_length] [2]
+Done processing ./test/testService.cpp
+Total errors found: 5
