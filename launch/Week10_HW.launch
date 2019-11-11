@@ -5,6 +5,11 @@ name="frequency"
 default="10"
 />
 
+<arg 
+name="runRosbag"
+default="false"
+/>
+
 <node 
 pkg="beginner_tutorials"
 type="talker"
@@ -19,6 +24,14 @@ type="listener"
 name="listener"
 output="screen"
 launch-prefix="gnome-terminal -e"
+/>
+
+<node 
+pkg="rosbag"
+name="record"
+type="record"
+args="-a -O rosbagRecord"
+if="$(arg runRosbag)"
 />
 
 </launch>
